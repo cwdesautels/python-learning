@@ -1,4 +1,11 @@
-def fuzzy_match(a: str, b: str) -> bool:
+def fuzzy_match(a: str, b: str, tolerance: int = 1) -> bool:
+    failures = 0
+    for i in range(len(a)):
+        if a[i] != b[i]:
+            if failures < tolerance:
+                failures += 1
+            else:
+                return False
     return True
 
 
@@ -29,6 +36,21 @@ def main():
     for _ in range(query_size):
         query = input()
         queries.append(query)
+    # dictionary = [
+    #     "tech",
+    #     "computer",
+    #     "technology",
+    #     "elevate",
+    #     "compute",
+    #     "elevator",
+    #     "company"
+    # ]
+    # queries = [
+    #     "tevh",
+    #     "new",
+    #     "techn",
+    #     "compa"
+    # ]
     solve(dictionary, queries)
 
 
