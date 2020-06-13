@@ -2,13 +2,6 @@ import sys
 from dataclasses import dataclass, field
 
 
-@dataclass(frozen=True)
-class Edge:
-    src: str
-    dest: str
-    weight: int
-
-
 @dataclass
 class Graph:
     edges: dict = field(default_factory=dict)
@@ -16,10 +9,7 @@ class Graph:
     def add_edge(self, src: str, dst: str, weight: int):
         if src not in self.edges:
             self.edges[src] = dict()
-        self.edges[src][dst] = Edge(src, dst, int(weight))
-
-    def get_neighbours(self, node: str):
-        return self.edges[node] if node in self.edges else {}
+        self.edges[src][dst] = int(weight)
 
 
 def bfs(src: str, dst: str, network: Graph):
@@ -32,7 +22,7 @@ def bfs(src: str, dst: str, network: Graph):
         if node == dst:
             all_paths.append(path)
         elif node not in visited:
-            for current_neighbour in network.get_neighbours(node):
+            for current_neighbour in network.edges[node] if node in network.edges else {}:
                 new_path = list(path)
                 new_path.append(current_neighbour)
                 queue.append(new_path)
@@ -41,7 +31,15 @@ def bfs(src: str, dst: str, network: Graph):
 
 
 def find_connections(src: str, dst: str, limit: int, network: Graph) -> list:
-    return bfs(src, dst, network)
+    paths = bfs(src, dst, network)
+    for path in paths:
+        cost = 0
+        i = 0
+        for i in range(len(path) - 1):
+            cost += network.edges[path[i]][path[i+1]]
+        path.append(cost)
+    paths.sort(key=lambda path: path[-1])
+    return paths
 
 
 def main():
