@@ -12,17 +12,20 @@ def fuzzy_match(a: str, b: str, tolerance: int = 1) -> bool:
 def solve(dictionary, queries):
     for query in queries:
         query_length = len(query)
-        matches = []
+        matches = set()
         for word in dictionary:
             word_length = len(word)
             if word_length == query_length and fuzzy_match(query, word):
-                matches.append(word)
+                matches.add(word)
             elif word_length > query_length and fuzzy_match(query, word[0:query_length]):
-                matches.append(word)
+                matches.add(word)
         if len(matches) == 0:
             print("<no matches>")
         else:
-            print(*matches)
+            sorted_matches = list(matches)
+            sorted_matches.sort()
+            sorted_matches = sorted_matches[:10]
+            print(*sorted_matches)
 
 
 def main():
