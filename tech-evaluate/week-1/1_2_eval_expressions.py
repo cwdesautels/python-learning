@@ -104,7 +104,7 @@ def execute_ops(ops, args, condition):
         operator = ops.pop()
         params = []
         #print(f"Operator: {operator}")
-        for i in range(operator.params):
+        for _ in range(operator.params):
             params.insert(0, args.pop().value)
         result = operator.executor(*params)
         args.append(Operand(lexeme=result,

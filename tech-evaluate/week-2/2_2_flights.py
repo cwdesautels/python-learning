@@ -19,12 +19,14 @@ def path_comparator(a: list, b: list) -> int:
     if result == 0:
         result = len(a) - len(b)
         if result == 0:
-            for char1, char2 in zip(" ".join(a[:-1]), " ".join(b[:-1])):
-                result = ord(char1) - ord(char2) if \
-                    'A' <= char1 <= 'Z' else \
-                    ord(char2) - ord(char1)
-                if result != 0:
-                    break
+            a_str = " ".join(a[:-1])
+            b_str = " ".join(b[:-1])
+            if a_str < b_str:
+                return -1
+            elif a_str > b_str:
+                return 1
+            else:
+                return 0
 
     return result
 
