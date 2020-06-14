@@ -13,9 +13,9 @@ def title_comparator(a: str, b: str) -> int:
     return result
 
 
-def is_subset(a: list, b: list) -> bool:
-    for entry in a:
-        if entry not in b:
+def is_subset(a: str, b: str) -> bool:
+    for word in a.split(" "):
+        if word not in b:
             return False
     return True
 
