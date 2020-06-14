@@ -2,7 +2,7 @@ import functools
 
 
 def title_comparator(a: str, b: str) -> int:
-    result = len(a) - len(b)
+    result = a.count(" ") - b.count(" ")
     if result == 0:
         if a < b:
             return -1
@@ -13,25 +13,29 @@ def title_comparator(a: str, b: str) -> int:
     return result
 
 
-def is_subset(a: list, b: list) -> bool:
-    for word in a:
-        if word not in b:
-            return False
-    return True
+def is_subset(a: set, b: set) -> bool:
+    if len(a) <= len(b):
+        for word in a:
+            if word not in b:
+                return False
+        return True
+    else:
+        return False
 
 
 def solve(titles: list, queries: list, limit: int = 10):
     for query in queries:
-        query = query.split(" ")
+        query_set = set(query.split(" "))
         matches = list()
         for title in titles:
-            title = title.split(" ")
-            if len(query) < len(title) and is_subset(query, title):
+            title_set = set(title.split(" "))
+            if is_subset(query_set, title_set):
                 matches.append(title)
         matches.sort(key=functools.cmp_to_key(title_comparator))
-        print(len(matches[:limit]))
-        for match in matches[:limit]:
-            print(*match)
+        matches = matches[:limit]
+        print(len(matches))
+        for match in matches:
+            print(match)
 
 
 def main():
@@ -73,7 +77,8 @@ def main():
     # ]
     # queries = [
     #     "wchsitwooiuydvmuwqlslacrwxdltofps",
-    #     "oyzhbqlvekcgumektaoqzepvtnigw mxljneolxdkdlkxnfnsjtjchcoyabysowfzlknyjq ru"
+    #     "oyzhbqlvekcgumektaoqzepvtnigw mxljneolxdkdlkxnfnsjtjchcoyabysowfzlknyjq ru",
+    #     "ebuplctulxkbrbtcdejdoqsytvbzoyoszjknndjzatatuwvacgdtwvrssvtgthbuslhgqshsmhlifikion ebuplctulxkbrbtcdejdoqsytvbzoyoszjknndjzatatuwvacgdtwvrssvtgthbuslhgqshsmhlifikion ebuplctulxkbrbtcdejdoqsytvbzoyoszjknndjzatatuwvacgdtwvrssvtgthbuslhgqshsmhlifikion"
     # ]
     solve(titles, queries)
 
