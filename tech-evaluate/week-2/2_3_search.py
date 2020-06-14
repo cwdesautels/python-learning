@@ -2,7 +2,7 @@ import functools
 
 
 def title_comparator(a: str, b: str) -> int:
-    result = a.count(" ") - b.count(" ")
+    result = len(a) - len(b)
     if result == 0:
         if a < b:
             return -1
