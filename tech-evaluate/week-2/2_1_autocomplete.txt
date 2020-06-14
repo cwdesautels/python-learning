@@ -77,3 +77,17 @@ In the first query, the word was "tevh", which does not match any words. However
 The same occurs with the last query "compa". It of course matches "company" with 0 errors. It also matches "compute" and "computer" since the prefixes "compu" and "compa" differ by only one character.
 
 
+Tests:
+7
+tech
+computer
+technology
+elevate
+compute
+elevator
+company
+4
+tevh
+new
+techn
+compa

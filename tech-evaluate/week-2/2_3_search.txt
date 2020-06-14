@@ -89,3 +89,20 @@ Notes
 The 3rd query has the word "views" which doesn't appear in the given titles so the answer is 0
 
 The 4th query has the word "code" which appears in 3 different titles but "jam" appears in only 2 of them. The output is sorted on total number of words in these titles.
+
+Tests:
+8
+google code jam is launching
+hash code competition results are announced
+google launches tech elevate program
+code jam final round
+youtube newest features
+football world cup results
+top viewed videos last year
+australian open singles results
+5
+world cup football
+results
+views
+jam code
+google program
